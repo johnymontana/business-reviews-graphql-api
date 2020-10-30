@@ -15,6 +15,7 @@ type User {
    name: String!
    userId: String!
    wrote: [Review] @relation(name: "WROTE", direction: OUT)
+   friends: [User] @cypher(statement: "MATCH (u:User) RETURN u")
 }
 
 type Review {
