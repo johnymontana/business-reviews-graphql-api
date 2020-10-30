@@ -1,0 +1,52 @@
+
+# These type definitions have been generated from your Neo4j database.
+
+# Here are some Neo4j specific scalars that you can use to map to native Neo4j types:
+scalar Point
+scalar Date
+scalar DateTime
+scalar Long
+
+# Edit these GraphQL type definitions below to change your GraphQL API
+# You can add custom logic defined with Cypher using the @cypher GraphQL schema directive
+# You can refer to the docs at https://grandstack.io
+type User {
+   _id: Long!
+   name: String!
+   userId: String!
+   wrote: [Review] @relation(name: "WROTE", direction: OUT)
+}
+
+type Review {
+   _id: Long!
+   date: Date!
+   reviewId: String!
+   stars: Float!
+   text: String
+   reviews: [Business] @relation(name: "REVIEWS", direction: OUT)
+   users: [User] @relation(name: "WROTE", direction: IN)
+}
+
+type Category {
+   _id: Long!
+   name: String!
+   businesss: [Business] @relation(name: "IN_CATEGORY", direction: IN)
+}
+
+type Business {
+   _id: Long!
+   address: String!
+   businessId: String!
+   city: String!
+   location: Point!
+   name: String!
+   state: String!
+   in_category: [Category] @relation(name: "IN_CATEGORY", direction: OUT)
+   reviews: [Review] @relation(name: "REVIEWS", direction: IN)
+}
+
+
+
+
+
+
